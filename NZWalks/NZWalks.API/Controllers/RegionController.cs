@@ -20,9 +20,9 @@ namespace NZWalks.API.Controllers
 
 
         [HttpGet]
-        public IActionResult GetAllRegions() 
+        public async Task<IActionResult> GetAllRegions() 
         {
-            var regions = regionRepository.GetAllAsync();
+            var regions =  await regionRepository.GetAllAsync();
 
             // Return DTO regions
             //var RegionsDTO = new List<Models.DTO.Region>();
@@ -30,15 +30,15 @@ namespace NZWalks.API.Controllers
             //{
             //    var regionDTO = new Models.DTO.Region()
             //    {
-            //        Id= region.Id,
-            //        Name = region.Name,    
-            //        Area= region.Area,
+            //        Id = region.Id,
+            //        Name = region.Name,
+            //        Area = region.Area,
             //        Lat = region.Lat,
             //        Long = region.Long,
-            //        Population= region.Population
+            //        Population = region.Population
             //    };
             //});
-            var RegionsDTO =  mapper.Map<List<Models.DTO.Region>>(regions);
+            var RegionsDTO =  mapper.Map<IEnumerable<Models.DTO.Region>>(regions);
 
             return Ok(RegionsDTO);
         }
